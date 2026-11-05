@@ -1,15 +1,16 @@
 /* Atmospheric refinement: a continuously deforming flow field, with flat controls. */
 :root {
-  --ambient-blue: 132 160 203;
-  --ambient-mist: 184 204 234;
-  --ambient-lavender: 172 156 201;
-  --ambient-warm: 245 244 241;
-  --ambient-strength: .66;
-  --ambient-chroma: .72;
-  --ambient-color-depth: .62;
-  --ambient-sheen: .4;
-  --ambient-edge-grain: .18;
   --ambient-paper: 215 215 214;
+  --ambient-color-a: 229 230 228; /* E5E6E4 */
+  --ambient-color-b: 207 210 205; /* CFD2CD */
+  --ambient-highlight: 251 251 242; /* FBFBF2 */
+  --ambient-shadow: 166 162 162; /* A6A2A2, diluted */
+  --ambient-strength: 1;
+  --ambient-chroma: 1;
+  --ambient-color-depth: .84;
+  --ambient-sheen: .44;
+  --ambient-edge-grain: .26;
+  --ambient-flow-speed: .85;
   --muted: #485160;
 }
 
@@ -34,15 +35,15 @@ body::before {
   z-index: -3;
   background:
     radial-gradient(ellipse 42% 56% at 8% 26%,
-      rgb(var(--ambient-blue) / .72) 0%,
-      rgb(var(--ambient-mist) / .58) 38%,
+      rgb(var(--ambient-color-b) / .72) 0%,
+      rgb(var(--ambient-color-a) / .58) 38%,
       transparent 76%),
     radial-gradient(ellipse 45% 49% at 92% 80%,
-      rgb(var(--ambient-lavender) / .76) 0%,
-      rgb(194 181 216 / .45) 43%,
+      rgb(var(--ambient-color-b) / .76) 0%,
+      rgb(var(--ambient-shadow) / .16) 43%,
       transparent 76%),
     radial-gradient(ellipse 48% 38% at 59% 112%,
-      rgb(var(--ambient-blue) / .35) 0%,
+      rgb(var(--ambient-color-b) / .35) 0%,
       transparent 73%);
 }
 
@@ -50,15 +51,15 @@ body::after {
   z-index: -1;
   background:
     radial-gradient(ellipse 55% 22% at 25% 65%,
-      rgb(var(--ambient-warm) / .7) 0%,
-      rgb(var(--ambient-warm) / .26) 42%,
+      rgb(var(--ambient-highlight) / .7) 0%,
+      rgb(var(--ambient-highlight) / .26) 42%,
       transparent 74%),
     radial-gradient(ellipse 21% 56% at 84% 32%,
-      rgb(227 232 242 / .68) 0%,
-      rgb(201 197 214 / .22) 44%,
+      rgb(var(--ambient-color-a) / .68) 0%,
+      rgb(var(--ambient-color-b) / .22) 44%,
       transparent 73%),
     radial-gradient(ellipse 36% 30% at 60% 0%,
-      rgb(var(--ambient-warm) / .4) 0%,
+      rgb(var(--ambient-highlight) / .4) 0%,
       transparent 76%);
 }
 
