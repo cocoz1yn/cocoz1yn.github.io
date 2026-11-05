@@ -20,15 +20,8 @@
           <p class="eyebrow">In progress / Geospatial AI</p>
           <h1>Data Center Parcel Suitability Agent: An Explainable Web-Based Screening Tool</h1>
           <p>This project proposes a web-based AI agent that helps users assess potential data center sites through clear, evidence-based spatial analysis. Using Philadelphia as a pilot area, the prototype will let users select a parcel on a map, choose screening factors, and generate a report explaining the parcel's strengths, concerns, and uncertainties.</p>
-          <p class="proposal-status">In development. The workflow and deliverables below describe the proposed scope.</p>
         </div>
       </article>
-      <div class="proposal-sections">
-        <section><h2>What the tool will assess</h2><p>The initial prototype will focus on four factors: flood hazard exposure, distance to power plants, terrain buildability, and community sensitivity through proximity to residential areas and schools.</p><p>Flood screening will combine FEMA flood-zone overlap with HAND-based elevation scenarios. Terrain analysis will examine slope and elevation variation, while distance measurements will provide context on nearby power and community features.</p></section>
-        <section><h2>An explainable workflow</h2><p>A Python backend will perform the spatial measurements and calculate factor scores using stated weights. A language model will coordinate restricted geospatial tools and translate their verified outputs into a plain-English report, keeping the underlying evidence visible.</p><p>The planned output includes a map, factor-by-factor measurements, an overall screening result, and a downloadable suitability report. Tool results will be checked against manual GIS calculations for a small set of test parcels.</p></section>
-        <section><h2>Planned data sources</h2><p>Philadelphia Department of Records parcel boundaries; FEMA's National Flood Hazard Layer; USGS 3D Elevation Program data; EIA-860 power plant locations; and OpenStreetMap residential areas and schools. Dataset sources, dates, quality, and missing information will be recorded.</p></section>
-        <section><h2>Scope and limitations</h2><p>Power plant proximity is a geographic screening measure, not evidence that the grid can supply a data center. The report will flag uncertainty and missing data. Future versions could consider transmission lines, substations, water availability, zoning, land cost, and more detailed flood-risk estimates.</p></section>
-      </div>
     </main>
     <script src="script.js" defer></script>
   </body>
