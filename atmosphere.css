@@ -1,51 +1,94 @@
-/* Atmospheric refinement: clearer edge light and fine grain, with flat controls. */
+/* Atmospheric refinement: flowing color and light, with flat controls. */
 :root {
-  --ambient-blue: 117 134 162;
-  --ambient-mist: 187 198 213;
-  --ambient-lavender: 201 197 214;
+  --ambient-blue: 132 160 203;
+  --ambient-mist: 184 204 234;
+  --ambient-lavender: 172 156 201;
   --ambient-warm: 245 244 241;
   --ambient-strength: 1;
-  --ambient-grain-opacity: .022;
-
+  --ambient-paper: 215 215 214;
+  --muted: #485160;
 }
+
+html { overflow-x: clip; }
 
 body {
   position: relative;
   isolation: isolate;
+  background-image:
+    linear-gradient(rgb(var(--ambient-paper) / .978), rgb(var(--ambient-paper) / .978)),
+    url("assets/ambient-grain.svg");
+  background-size: auto, 160px 160px;
 }
 
 body::before,
 body::after {
   content: "";
   position: fixed;
-  inset: 0;
+  inset: -18vmax;
   pointer-events: none;
+  opacity: var(--ambient-strength);
+  will-change: transform;
 }
 
+/* The deeper color layer moves underneath the brighter, translucent folds. */
 body::before {
   z-index: -2;
-  opacity: var(--ambient-strength);
   background:
-    radial-gradient(ellipse 54% 85% at -7% 12%,
-      rgb(var(--ambient-blue) / .28) 0%,
-      rgb(var(--ambient-mist) / .16) 35%,
-      transparent 73%),
-    radial-gradient(ellipse 49% 66% at 107% 78%,
-      rgb(var(--ambient-lavender) / .34) 0%,
-      rgb(var(--ambient-blue) / .09) 37%,
-      transparent 72%),
-    radial-gradient(ellipse 48% 57% at 21% 109%,
-      rgb(var(--ambient-warm) / .3) 0%,
-      transparent 76%);
+    radial-gradient(ellipse 42% 56% at 8% 26%,
+      rgb(var(--ambient-blue) / .72) 0%,
+      rgb(var(--ambient-mist) / .58) 38%,
+      transparent 76%),
+    radial-gradient(ellipse 45% 49% at 92% 80%,
+      rgb(var(--ambient-lavender) / .76) 0%,
+      rgb(194 181 216 / .45) 43%,
+      transparent 76%),
+    radial-gradient(ellipse 48% 38% at 59% 112%,
+      rgb(var(--ambient-blue) / .35) 0%,
+      transparent 73%);
+  animation: ambient-color-flow 22s ease-in-out -6s infinite alternate;
 }
 
 body::after {
   z-index: -1;
-  background: url("assets/ambient-grain.svg") repeat;
-  opacity: var(--ambient-grain-opacity);
+  background:
+    radial-gradient(ellipse 55% 22% at 25% 65%,
+      rgb(var(--ambient-warm) / .7) 0%,
+      rgb(var(--ambient-warm) / .26) 42%,
+      transparent 74%),
+    radial-gradient(ellipse 21% 56% at 84% 32%,
+      rgb(227 232 242 / .68) 0%,
+      rgb(201 197 214 / .22) 44%,
+      transparent 73%),
+    radial-gradient(ellipse 36% 30% at 60% 0%,
+      rgb(var(--ambient-warm) / .4) 0%,
+      transparent 76%);
+  animation: ambient-light-flow 18s ease-in-out -8s infinite alternate;
+}
+
+@keyframes ambient-color-flow {
+  0% { transform: translate3d(-4%, 3%, 0) rotate(-6deg) scale(1.02); }
+  50% { transform: translate3d(3%, -3%, 0) rotate(2deg) scale(1.06); }
+  100% { transform: translate3d(6%, 2%, 0) rotate(7deg) scale(1.03); }
+}
+
+@keyframes ambient-light-flow {
+  0% { transform: translate3d(5%, -3%, 0) rotate(7deg) scale(1.04); }
+  50% { transform: translate3d(-3%, 4%, 0) rotate(-4deg) scale(1.1); }
+  100% { transform: translate3d(-6%, -1%, 0) rotate(-8deg) scale(1.03); }
+}
+
+@media (max-width: 760px) {
+  body::before,
+  body::after { inset: -12vmax; opacity: .82; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before,
+  body::after { animation: none; transform: none; will-change: auto; }
 }
 
 @media (forced-colors: active) {
+  body { background-image: none; }
   body::before,
-  body::after { display: none; }
+  body::after { display: none; animation: none; }
 }
