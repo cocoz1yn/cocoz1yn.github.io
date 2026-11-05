@@ -13,6 +13,8 @@ https://cocoz1yn.github.io/
 
 - `index.html`: local entry point that opens Work
 - `work.html`: selected work with project search and suggestions
+- `project-allentown-ndvi.html`: NDVI and vegetation cover in Allentown
+- `project-shooting-victim-visualization.html`: Philadelphia shooting-victim data visualization
 - `in-progress.html`: projects in development
 - `project-data-center-suitability.html`: parcel suitability agent proposal
 - `project-philadelphia-health-accessibility.html`: healthcare accessibility proposal
