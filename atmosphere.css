@@ -4,11 +4,11 @@
   --ambient-mist: 184 204 234;
   --ambient-lavender: 172 156 201;
   --ambient-warm: 245 244 241;
-  --ambient-strength: .72;
-  --ambient-chroma: .78;
-  --ambient-color-depth: .66;
+  --ambient-strength: .66;
+  --ambient-chroma: .72;
+  --ambient-color-depth: .62;
   --ambient-sheen: .4;
-  --ambient-frost-opacity: .28;
+  --ambient-edge-grain: .18;
   --ambient-paper: 215 215 214;
   --muted: #485160;
 }
@@ -18,10 +18,6 @@ html { overflow-x: clip; }
 body {
   position: relative;
   isolation: isolate;
-  background-image:
-    linear-gradient(rgb(var(--ambient-paper) / .978), rgb(var(--ambient-paper) / .978)),
-    url("assets/ambient-grain.svg");
-  background-size: auto, 160px 160px;
 }
 
 body::before,
@@ -75,16 +71,9 @@ body::after {
   pointer-events: none;
 }
 
-body.fluid-atmosphere-ready::before { display: none; }
-
-/* Fine, stationary frost sits over the background, below all text and images. */
-body.fluid-atmosphere-ready::after {
-  display: block;
-  inset: 0;
-  background: url("assets/ambient-grain.svg") repeat;
-  opacity: var(--ambient-frost-opacity);
-  mix-blend-mode: soft-light;
-}
+/* Texture is rendered inside the moving edges, not as a page-wide overlay. */
+body.fluid-atmosphere-ready::before,
+body.fluid-atmosphere-ready::after { display: none; }
 
 @media (max-width: 760px) {
   body::before,
