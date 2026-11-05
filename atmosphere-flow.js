@@ -15,13 +15,13 @@
   let animationFrame = 0;
   let renderer = null;
   let aspect = 1;
-  const finish = { chroma: 1, depth: .84, sheen: .44, edgeGrain: .26, speed: .85 };
+  const finish = { chroma: 1, depth: .84, sheen: .30, edgeGrain: .17, speed: .85 };
   const palette = {
     paper: [215, 215, 214],
-    colorA: [229, 230, 228],
-    colorB: [207, 210, 205],
-    highlight: [251, 251, 242],
-    shadow: [166, 162, 162],
+    colorA: [207, 216, 215],
+    colorB: [231, 207, 205],
+    highlight: [247, 247, 241],
+    shadow: [181, 201, 195],
   };
   const paletteUniforms = Object.fromEntries(Object.keys(palette).map(name => [name, new Float32Array(3)]));
 
@@ -111,6 +111,11 @@
       float lighting = dot(normal, normalize(vec3(-0.45, 0.65, 1.0)));
       color = mix(color, uShadow, smoothstep(0.15, 0.95, sin(foldPhase + 0.9)) * coverage * 0.14);
       color = mix(color, warm, lightFold * uFinish.z * coverage);
+      // A soft transmitted highlight follows each fold like a thin sheet of glass.
+      // It belongs to the moving material, leaving the gray gaps untouched.
+      float glassLight = pow(0.5 + 0.5 * cos(foldPhase + 0.38), 14.0);
+      float glassEdge = edge * smoothstep(0.25, 0.85, lighting);
+      color = mix(color, warm, glassLight * coverage * 0.12 + glassEdge * 0.07);
       color += (lighting - 0.76) * 0.055 * coverage;
       color += grain * edge * uEdgeGrain * 0.16;
       gl_FragColor = vec4(clamp(color, 0.0, 1.0), 1.0);
@@ -222,13 +227,16 @@
             const side = Math.max(0, Math.min(1, 0.5 + (u + q * 0.4) * 0.45));
             const depth = coverage * finish.depth;
             const shade = Math.pow((Math.sin(u * 1.2 + v * 0.6 + q * 2.6 - r * 1.6 + t * 0.5 + 0.9) + 1) * 0.5, 2) * coverage * 0.14;
+            const glassPhase = u * 1.2 + v * 0.6 + q * 2.6 - r * 1.6 + t * 0.5;
+            const glass = Math.pow((Math.sin(glassPhase + 0.38) + 1) * 0.5, 14) * coverage * 0.12 + edge * 0.035;
             const offset = (y * width + x) * 4;
             for (let channel = 0; channel < 3; channel++) {
               const pigment = colorA[channel] * (1 - side) + colorB[channel] * side;
               const dye = paper[channel] * (1 - finish.chroma) + pigment * finish.chroma;
               const baseColor = paper[channel] * (1 - depth) + dye * depth;
               const color = baseColor * (1 - shade) + shadow[channel] * shade;
-              pixels.data[offset + channel] = color * (1 - ribbon) + highlight[channel] * ribbon + grain * edge * finish.edgeGrain * 3;
+              const litColor = color * (1 - ribbon) + highlight[channel] * ribbon;
+              pixels.data[offset + channel] = litColor * (1 - glass) + highlight[channel] * glass + grain * edge * finish.edgeGrain * 3;
             }
             pixels.data[offset + 3] = 255;
           }
@@ -253,8 +261,8 @@
     };
     finish.chroma = readFinish("--ambient-chroma", 1);
     finish.depth = readFinish("--ambient-color-depth", .84);
-    finish.sheen = readFinish("--ambient-sheen", .44);
-    finish.edgeGrain = readFinish("--ambient-edge-grain", .26);
+    finish.sheen = readFinish("--ambient-sheen", .30);
+    finish.edgeGrain = readFinish("--ambient-edge-grain", .17);
     finish.speed = readFinish("--ambient-flow-speed", .85, 2);
     const properties = { paper: "--ambient-paper", colorA: "--ambient-color-a", colorB: "--ambient-color-b", highlight: "--ambient-highlight", shadow: "--ambient-shadow" };
     Object.entries(properties).forEach(([name, property]) => {
