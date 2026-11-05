@@ -95,22 +95,14 @@ h1, h2, h3, p { margin-top: 0; }
 .gallery-slide[hidden] { display: none; }
 .gallery-position { margin: 9px 0 0; color: var(--muted); font: 500 13px var(--font-label); }
 
-/* Index: an unadorned route into project notes. */
-.index-page { padding: 76px 0 110px; }
-.index-intro { display: grid; grid-template-columns: minmax(180px, .68fr) minmax(360px, 1.32fr); gap: clamp(44px, 12vw, 190px); margin-bottom: 58px; }
-.index-intro > p:last-child { max-width: 540px; margin: 0; color: var(--muted); font-size: 17px; }
-.index-locator { display: flex; align-items: center; gap: 10px; margin: 0 0 18px auto; width: max-content; font: 500 13px var(--font-label); }
-.index-locator span { margin-right: 5px; color: var(--muted); }
-.index-locator a { color: var(--cinerous); }
-.index-locator a:hover, .index-locator a:focus { color: var(--ink); }
-.index-list { border-top: 1px solid var(--line); }
-.index-list article { scroll-margin-top: 24px; }
-.index-list article { display: grid; grid-template-columns: 120px minmax(0, 1fr) 110px; gap: 20px; padding: 27px 0; border-bottom: 1px solid var(--line); }
-.index-list > article > span, .index-list a { color: var(--cinerous); font: 500 13px var(--font-label); }
-.index-list h1, .index-list h2 { margin: 0 0 8px; font: 500 clamp(25px, 2.5vw, 35px)/1.05 var(--font-display); }
-.index-list p { max-width: 650px; margin: 0; color: var(--muted); font-size: 14px; }
-.index-list a { align-self: end; color: var(--ink); }
-.index-list a:hover { color: var(--cinerous); }
+/* Alphabetical shortcuts within the Work gallery. */
+.work-page .gallery-context { flex-wrap: wrap; row-gap: 16px; }
+.project-locator { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-left: auto; font: 500 13px var(--font-label); }
+.project-locator span { margin-right: 5px; color: var(--muted); }
+.project-locator a { min-width: 24px; padding: 5px 4px; color: var(--cinerous); text-align: center; }
+.project-locator a:hover, .project-locator a:focus-visible { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+.project-rail { scroll-padding-inline: max(28px, calc((100vw - 1180px) / 2)); }
+.gallery-project { scroll-margin-block-start: 24px; }
 
 /* Project pages: image, short project context, then the external destination. */
 .project-detail-page { padding: 42px 0 96px; }
@@ -162,11 +154,11 @@ h1, h2, h3, p { margin-top: 0; }
   .project-rail { display: grid; gap: 42px; overflow: visible; padding: 0 18px 74px; }
   .gallery-project, .gallery-project.project-wide, .gallery-project.project-tall, .gallery-project.project-medium { height: auto; margin: 0; }
   .gallery-project-link { gap: 12px; }
-  .project-media { height: 54vw; min-height: 250px; }
+  .project-media { width: 100%; height: 54vw; min-height: 250px; }
   .in-progress-page .project-media { width: 100%; height: auto; min-height: 0; }
   .project-copy p { opacity: 1; }
   .project-copy span { opacity: 1; }
-  .about-profile, .quiet-section-head, .index-intro, .contact-layout { grid-template-columns: 1fr; gap: 30px; }
+  .about-profile, .quiet-section-head, .contact-layout { grid-template-columns: 1fr; gap: 30px; }
   .about-intro { padding: 40px 0 56px; }
   .about-intro > .eyebrow { margin-bottom: 28px; }
   .about-lede { gap: 26px; font-size: 16px; }
@@ -176,9 +168,7 @@ h1, h2, h3, p { margin-top: 0; }
   .creative-grid { grid-template-columns: 1fr; gap: 28px; }
   .creative-empty { min-height: 220px; }
   .personal-galleries { grid-template-columns: 1fr; gap: 42px; }
-  .index-page { padding: 56px 0 76px; }
-  .index-locator { width: auto; flex-wrap: wrap; margin: 0 0 18px; }
-  .index-list article { grid-template-columns: 1fr; gap: 12px; }
+  .project-locator { margin-left: 0; }
   .project-detail-page { padding: 30px 0 70px; }
   .project-detail-back { margin-bottom: 30px; }
   .project-detail { grid-template-columns: 1fr; gap: 32px; }
