@@ -1,4 +1,4 @@
-/* Atmospheric refinement, round 1: static edge light and background-only grain. */
+/* Atmospheric refinement: clearer edge light and fine grain, with flat controls. */
 :root {
   --ambient-blue: 117 134 162;
   --ambient-mist: 187 198 213;
@@ -6,6 +6,7 @@
   --ambient-warm: 245 244 241;
   --ambient-strength: 1;
   --ambient-grain-opacity: .022;
+
 }
 
 body {
@@ -25,15 +26,16 @@ body::before {
   z-index: -2;
   opacity: var(--ambient-strength);
   background:
-    radial-gradient(ellipse 66% 95% at -22% 18%,
-      rgb(var(--ambient-blue) / .15) 0%,
-      rgb(var(--ambient-mist) / .075) 36%,
+    radial-gradient(ellipse 54% 85% at -7% 12%,
+      rgb(var(--ambient-blue) / .28) 0%,
+      rgb(var(--ambient-mist) / .16) 35%,
+      transparent 73%),
+    radial-gradient(ellipse 49% 66% at 107% 78%,
+      rgb(var(--ambient-lavender) / .34) 0%,
+      rgb(var(--ambient-blue) / .09) 37%,
       transparent 72%),
-    radial-gradient(ellipse 53% 70% at 112% 82%,
-      rgb(var(--ambient-lavender) / .16) 0%,
-      transparent 68%),
-    radial-gradient(ellipse 40% 50% at 34% 118%,
-      rgb(var(--ambient-warm) / .12) 0%,
+    radial-gradient(ellipse 48% 57% at 21% 109%,
+      rgb(var(--ambient-warm) / .3) 0%,
       transparent 76%);
 }
 
