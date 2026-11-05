@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500&family=Inter:wght@400;500;600&family=Libre+Bodoni:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css?v=20261105-work-locate">
+    <link rel="stylesheet" href="style.css?v=20261105-project-search">
   </head>
   <body class="work-page">
     <a class="skip-link" href="#main-content">Skip to projects</a>
@@ -22,70 +22,81 @@
     <main id="main-content" class="gallery-page">
       <div class="gallery-context section-shell">
         <div class="gallery-heading"><p class="eyebrow">Selected work / 2025-26</p><a class="gallery-switch" href="in-progress.html">In progress <span aria-hidden="true">↗</span></a></div>
-        <nav class="project-locator" aria-label="Locate projects alphabetically"><span>Locate</span><a href="#letter-a" aria-label="Locate projects beginning with A">A</a><a href="#letter-c" aria-label="Locate projects beginning with C">C</a><a href="#letter-f" aria-label="Locate projects beginning with F">F</a><a href="#letter-k" aria-label="Locate projects beginning with K">K</a><a href="#letter-o" aria-label="Locate projects beginning with O">O</a><a href="#letter-p" aria-label="Locate projects beginning with P">P</a><a href="#letter-s" aria-label="Locate projects beginning with S">S</a><a href="#letter-u" aria-label="Locate projects beginning with U">U</a></nav>
+        <div class="project-search" role="search" aria-label="Find a project">
+          <div class="project-search-field">
+            <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m16 16 5 5"></path></svg>
+            <input id="project-search" type="search" placeholder="Search projects" aria-label="Search projects by title or topic" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="project-search-results" autocomplete="off" spellcheck="false">
+            <button class="project-search-clear" type="button" aria-label="Clear project search" hidden>&times;</button>
+          </div>
+          <div class="project-search-panel" hidden>
+            <p class="project-search-status" role="status" aria-live="polite"></p>
+            <ul id="project-search-results" class="project-search-results" role="listbox" aria-label="Matching projects"></ul>
+            <p class="project-search-empty" hidden>No projects found. Try transit, housing, or flood.</p>
+          </div>
+        </div>
       </div>
       <section class="project-rail" tabindex="0" aria-label="Selected project gallery">
-        <article class="gallery-project project-wide">
+        <article class="gallery-project project-wide" data-search-keywords="spatial analysis solar sun shadows GPU CUDA raster urban modeling">
           <a href="project-urban-shadow-analysis.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/urban-shadow-analysis.gif" alt="Animated daily urban shadow analysis generated with GPU programming"><figcaption>01 / GPU spatial analysis</figcaption></figure>
             <div class="project-copy"><h1>Urban Shadow Analysis using GPU Programming</h1><p>GPU-accelerated solar-shadow modeling across an urban digital surface model throughout the day.</p><span>View project</span></div>
           </a>
         </article>
-        <article class="gallery-project project-medium" id="letter-f">
+        <article class="gallery-project project-medium" data-search-keywords="flood flooding hydrology terrain inundation risk Calgary spatial modeling">
           <a href="project-flood-inundation.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/flood-inundation-probability.png" alt="Flood inundation probability map"><figcaption>02 / Calgary</figcaption></figure>
             <div class="project-copy"><h2>Flood Inundation Probability</h2><p>Terrain, hydrology, and built-environment conditions modeled as spatial risk.</p><span>View project</span></div>
           </a>
         </article>
-        <article class="gallery-project project-tall project-offset" id="letter-u">
+        <article class="gallery-project project-tall project-offset" data-search-keywords="urban heat island climate cooling environment StoryMap San Bernardino">
           <a href="project-urban-heat.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/urban-heat-storymap.png" alt="Urban Heat Island StoryMap cover image"><figcaption>03 / San Bernardino County</figcaption></figure>
             <div class="project-copy"><h2>Urban Heat Island</h2><p>Challenges and practical cooling strategies for a changing urban climate.</p><span>View StoryMap</span></div>
           </a>
         </article>
-        <article class="gallery-project project-wide" id="letter-p">
+        <article class="gallery-project project-wide" data-search-keywords="urban planning land use stadium district transportation mobility Philadelphia">
           <a href="project-packer-park.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/packer-park-stadium-district.png" alt="Packer Park Stadium District map and planning analysis"><figcaption>04 / Philadelphia</figcaption></figure>
             <div class="project-copy"><h2>Packer Park Stadium District</h2><p>Land use, mobility, and redevelopment compatibility around Philadelphia's stadium district.</p><span>View project</span></div>
           </a>
         </article>
-        <article class="gallery-project project-medium project-offset" id="letter-s">
+        <article class="gallery-project project-medium project-offset" data-search-keywords="SEPTA bus transit transportation ridership spatial statistics Philadelphia">
           <a href="project-septa-ridership.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/septa-bus-stop-ridership.png" alt="SEPTA bus stop ridership map across Philadelphia"><figcaption>05 / Philadelphia</figcaption></figure>
             <div class="project-copy"><h2>SEPTA Bus Stop Ridership</h2><p>Modeling weekday boardings by stop to understand transit demand across the city.</p><span>View project</span></div>
           </a>
         </article>
-        <article class="gallery-project project-medium project-offset">
+        <article class="gallery-project project-medium project-offset" data-search-keywords="housing real estate home prices regression spatial analysis Philadelphia">
           <a href="project-philadelphia-housing.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/philadelphia-housing-model.png" alt="Philadelphia housing price model map"><figcaption>06 / Philadelphia</figcaption></figure>
             <div class="project-copy"><h2>Philadelphia Housing Model</h2><p>Reading home values through parcel, neighborhood, and spatial patterns.</p><span>View project</span></div>
           </a>
         </article>
-        <article class="gallery-project project-tall" id="letter-o">
+        <article class="gallery-project project-tall" data-search-keywords="urban growth forecasting simulation spatial modeling Orlando">
           <a href="project-orlando-growth.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/orlando-urban-growth.png" alt="Orlando urban growth model map"><figcaption>07 / Orlando</figcaption></figure>
             <div class="project-copy"><h2>Orlando Urban Growth</h2><p>A spatial forecast of urban growth across the Orlando metropolitan area.</p><span>View project</span></div>
           </a>
         </article>
-        <article class="gallery-project project-wide project-offset" id="letter-c">
+        <article class="gallery-project project-wide project-offset" data-search-keywords="consumer debt legal aid law social equity spatial analysis Orange County StoryMap">
           <a href="project-consumer-debt.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/consumer-debt-legal-aid.png" alt="Consumer debt and legal aid spatial analysis"><figcaption>08 / Orange County</figcaption></figure>
             <div class="project-copy"><h2>Consumer Debt and Legal Aid</h2><p>A spatial analysis of where consumer debt-related legal needs are concentrated.</p><span>View StoryMap</span></div>
           </a>
         </article>
-        <article class="gallery-project project-medium" id="letter-k">
+        <article class="gallery-project project-medium" data-search-keywords="k means clustering unsupervised machine learning spatial neighborhoods socioeconomic housing Philadelphia">
           <a href="project-k-means-clustering.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/k-means-clustering.png" alt="K-means clustering map of Philadelphia"><figcaption>09 / Philadelphia</figcaption></figure>
             <div class="project-copy"><h2>K-Means Clustering of Philadelphia Neighborhood Types</h2><p>Grouping census block groups by shared housing and socioeconomic characteristics.</p><span>View paper</span></div>
           </a>
         </article>
-        <article class="gallery-project project-tall" id="letter-a">
+        <article class="gallery-project project-tall" data-search-keywords="logistic regression statistics alcohol traffic crash road safety risk predictive modeling">
           <a href="project-logistic-regression-crashes.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/alcohol-crash-logistic-regression.png" alt="ROC curve from logistic regression model"><figcaption>10 / Crash analysis</figcaption></figure>
             <div class="project-copy"><h2>Alcohol-Involved Crash Risk: A Logistic Regression Study</h2><p>Examining factors associated with alcohol-involved crashes through predictive modeling.</p><span>View paper</span></div>
           </a>
         </article>
-        <article class="gallery-project project-wide">
+        <article class="gallery-project project-wide" data-search-keywords="spatial lag spatial error geographically weighted regression statistics housing Philadelphia">
           <a href="project-spatial-lag-housing.html" class="gallery-project-link">
             <figure class="project-media"><img src="assets/spatial-lag-housing-values.png" alt="Spatial regression map of Philadelphia housing values"><figcaption>11 / Philadelphia</figcaption></figure>
             <div class="project-copy"><h2>Spatial Lag Models for Philadelphia Housing Values</h2><p>Comparing spatial regression approaches for neighborhood-scale housing patterns.</p><span>View paper</span></div>
@@ -93,6 +104,7 @@
         </article>
       </section>
     </main>
-    <script src="script.js?v=20261105-work-locate" defer></script>
+    <script src="script.js?v=20261105-project-search" defer></script>
+    <script src="project-search.js?v=20261105-project-search" defer></script>
   </body>
 </html>

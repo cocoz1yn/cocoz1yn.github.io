@@ -82,22 +82,3 @@ imageGalleries.forEach((gallery) => {
   previousButton.addEventListener("click", () => showSlide(activeIndex - 1));
   nextButton.addEventListener("click", () => showSlide(activeIndex + 1));
 });
-
-const projectLocatorLinks = document.querySelectorAll(".project-locator a");
-
-projectLocatorLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    const target = document.getElementById(link.hash.slice(1));
-    if (!target) return;
-    event.preventDefault();
-    const isDesktopGallery = window.matchMedia("(min-width: 761px)").matches;
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target.scrollIntoView({
-      behavior: reduceMotion ? "instant" : "smooth",
-      block: isDesktopGallery ? "nearest" : "start",
-      inline: "start",
-    });
-    window.history.replaceState(null, "", link.hash);
-    target.querySelector(".gallery-project-link")?.focus({ preventScroll: true });
-  });
-});
