@@ -59,14 +59,13 @@ h1, h2, h3, p { margin-top: 0; }
 .gallery-project-link:hover .project-copy p, .gallery-project-link:focus .project-copy p, .gallery-project-link:hover .project-copy span, .gallery-project-link:focus .project-copy span { opacity: 1; }
 .gallery-project-link:hover .project-copy span, .gallery-project-link:focus .project-copy span { color: var(--ink); }
 
-/* About: a video-ready media stage followed by quiet personal context. */
-.about-media-stage { position: relative; width: 100%; height: min(61svh, 720px); margin: 0; overflow: hidden; background: var(--surface); }
-.about-media-stage img { height: 100%; object-fit: cover; filter: saturate(.58) contrast(.96); }
-.about-media-stage figcaption { position: absolute; right: max(28px, calc((100vw - 1180px) / 2)); bottom: 18px; display: flex; gap: 1px; font: 500 13px var(--font-label); }
-.about-media-stage figcaption span { padding: 7px 9px; background: var(--paper); }
-.about-media-stage figcaption span:last-child { background: var(--ink); color: var(--paper); }
-.about-intro { padding: 82px 0 108px; }
-.about-intro > .eyebrow { margin-bottom: 38px; }
+/* About: an introduction beside a portrait, followed by personal work. */
+.about-intro { padding: 64px 0 88px; }
+.about-intro > .eyebrow { margin-bottom: 32px; }
+.about-profile { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: clamp(36px, 5vw, 72px); align-items: start; }
+.about-bio { min-width: 0; }
+.about-portrait { width: min(100%, 220px); margin: 0; background: var(--surface); }
+.about-portrait img { width: 100%; height: auto; }
 .about-lede { max-width: 900px; display: grid; gap: 32px; font: 400 17px/1.68 var(--font-body); }
 .about-lede p { margin: 0; }
 .detail-list { max-width: 900px; margin-top: 54px; border-top: 1px solid var(--line); }
@@ -74,16 +73,9 @@ h1, h2, h3, p { margin-top: 0; }
 .detail-list span { color: var(--cinerous); font: 500 13px var(--font-label); }
 .detail-list strong { font-size: 14px; font-weight: 500; }
 .education-records { display: grid; gap: 10px; }
-.places-section, .personal-work { padding: 88px 0; border-top: 1px solid var(--line); }
+.personal-work { padding: 88px 0; border-top: 1px solid var(--line); }
 .quiet-section-head { display: grid; grid-template-columns: minmax(180px, .68fr) minmax(360px, 1.32fr); gap: clamp(44px, 12vw, 190px); margin-bottom: 46px; }
 .quiet-section-head > p:last-child { max-width: 550px; margin: 0; color: var(--muted); font-size: 17px; }
-.places-list { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
-.places-list article { min-height: 190px; padding: 16px 18px 20px 0; border-right: 1px solid var(--line); display: flex; flex-direction: column; }
-.places-list article:not(:first-child) { padding-left: 18px; }
-.places-list article:last-child { border-right: 0; }
-.places-list span, .places-list p { color: var(--cinerous); font: 500 13px var(--font-label); }
-.places-list h2 { margin: auto 0 7px; font: 500 clamp(28px, 3vw, 43px)/1 var(--font-display); }
-.places-list p { margin: 0; color: var(--muted); }
 .creative-grid { display: grid; grid-template-columns: 1.3fr 1fr .78fr; gap: 16px; }
 .creative-grid figure { margin: 0; }
 .creative-empty { min-height: 260px; display: flex; align-items: end; padding: 14px; background: var(--cloudy-sky); color: var(--ink); }
@@ -174,19 +166,13 @@ h1, h2, h3, p { margin-top: 0; }
   .in-progress-page .project-media { width: 100%; height: auto; min-height: 0; }
   .project-copy p { opacity: 1; }
   .project-copy span { opacity: 1; }
-  .about-media-stage { height: 50svh; }
-  .about-media-stage figcaption { right: 18px; bottom: 12px; display: grid; gap: 1px; }
-  .about-intro, .quiet-section-head, .index-intro, .contact-layout { grid-template-columns: 1fr; gap: 30px; }
-  .about-intro { padding: 72px 0; }
+  .about-profile, .quiet-section-head, .index-intro, .contact-layout { grid-template-columns: 1fr; gap: 30px; }
+  .about-intro { padding: 40px 0 56px; }
   .about-intro > .eyebrow { margin-bottom: 28px; }
   .about-lede { gap: 26px; font-size: 16px; }
   .detail-list { margin-top: 42px; }
   .detail-list > div { grid-template-columns: 1fr; gap: 8px; }
-  .places-section, .personal-work { padding: 68px 0; }
-  .places-list { grid-template-columns: repeat(2, 1fr); }
-  .places-list article:nth-child(2) { border-right: 0; }
-  .places-list article:nth-child(n + 3) { border-top: 1px solid var(--line); padding-top: 16px; }
-  .places-list article:nth-child(3) { padding-left: 0; }
+  .personal-work { padding: 68px 0; }
   .creative-grid { grid-template-columns: 1fr; gap: 28px; }
   .creative-empty { min-height: 220px; }
   .personal-galleries { grid-template-columns: 1fr; gap: 42px; }
