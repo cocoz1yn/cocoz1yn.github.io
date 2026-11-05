@@ -62,9 +62,9 @@ h1, h2, h3, p { margin-top: 0; }
 /* About: an introduction beside a portrait, followed by personal work. */
 .about-intro { padding: 64px 0 88px; }
 .about-intro > .eyebrow { margin-bottom: 32px; }
-.about-profile { display: grid; grid-template-columns: minmax(0, 1fr) 220px; gap: clamp(36px, 5vw, 72px); align-items: start; }
+.about-profile { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: clamp(36px, 5vw, 72px); align-items: start; }
 .about-bio { min-width: 0; }
-.about-portrait { width: min(100%, 220px); margin: 0; background: var(--surface); }
+.about-portrait { width: min(100%, 280px); margin: 0; background: var(--surface); }
 .about-portrait img { width: 100%; height: auto; }
 .about-lede { max-width: 900px; display: grid; gap: 32px; font: 400 17px/1.68 var(--font-body); }
 .about-lede p { margin: 0; }
