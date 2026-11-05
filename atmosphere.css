@@ -2,6 +2,7 @@
 :root {
   --ambient-paper: 233 233 230; /* lighter gray-white base */
   --paper: rgb(var(--ambient-paper));
+  --surface: #e2e2e0; /* neutral light gray, coordinated with the gray-white atmosphere */
   --ambient-color-a: 229 230 228; /* E5E6E4, pale gray */
   --ambient-color-b: 207 210 205; /* CFD2CD, gray green */
   --ambient-highlight: 251 251 242; /* FBFBF2, warm white glass light */

@@ -15,9 +15,12 @@ if (projectRail) {
   projectRail.addEventListener("wheel", (event) => {
     const isDesktopGallery = window.matchMedia("(min-width: 761px)").matches;
 
-    if (isDesktopGallery && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
+    if (isDesktopGallery && !event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
       event.preventDefault();
-      projectRail.scrollBy({ left: event.deltaY, behavior: "smooth" });
+      // Follow each wheel event immediately; queued smooth scrolling and snapping
+      // otherwise restart on every tick and make the gallery hesitate, then jump.
+      const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? projectRail.clientWidth : 1;
+      projectRail.scrollLeft += event.deltaY * unit;
     }
   }, { passive: false });
 
