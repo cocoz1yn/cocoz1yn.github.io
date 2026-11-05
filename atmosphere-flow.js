@@ -15,6 +15,7 @@
   let animationFrame = 0;
   let renderer = null;
   let aspect = 1;
+  const finish = { chroma: .78, depth: .66, sheen: .4 };
 
   const vertexSource = `
     attribute vec2 aPosition;
@@ -27,12 +28,8 @@
     uniform vec2 uPointer;
     uniform vec2 uPointerVelocity;
     uniform float uPointerStrength;
+    uniform vec3 uFinish;
 
-    float hash(vec2 p) {
-      p = fract(p * vec2(123.34, 456.21));
-      p += dot(p, p + 45.32);
-      return fract(p.x * p.y);
-    }
     void main() {
       vec2 uv = gl_FragCoord.xy / uResolution;
       vec2 p = (uv * 2.0 - 1.0) * vec2(uResolution.x / uResolution.y, 1.0);
@@ -66,17 +63,17 @@
       vec3 lavender = vec3(172.0, 156.0, 201.0) / 255.0;
       vec3 warm = vec3(245.0, 244.0, 241.0) / 255.0;
       float colorMix = smoothstep(-0.95, 0.95, p.x + (q.y - q.x) * 0.35 + sin(t * 0.3) * 0.3);
-      vec3 dye = mix(blue, lavender, colorMix);
-      vec3 color = mix(paper, dye, 0.18 + density * 0.52);
+      vec3 dye = mix(paper, mix(blue, lavender, colorMix), uFinish.x);
+      float coverage = smoothstep(0.22, 0.82, density);
+      vec3 color = mix(paper, dye, coverage * uFinish.y);
 
       // Broad light and shadow travel over the folds without hard contour lines.
       float lightFold = pow(0.5 + 0.5 * cos(foldPhase), 3.0);
       vec3 normal = normalize(vec3(cos(wavePhase) * 0.35, cos(foldPhase) * 0.45, 0.9));
       float lighting = dot(normal, normalize(vec3(-0.45, 0.65, 1.0)));
-      color -= smoothstep(0.15, 0.95, sin(foldPhase + 0.9)) * vec3(0.025, 0.03, 0.037);
-      color = mix(color, warm, lightFold * 0.72);
-      color += (lighting - 0.76) * 0.075;
-      color += (hash(fract(gl_FragCoord.xy / 64.0)) - 0.5) * 0.009;
+      color -= smoothstep(0.15, 0.95, sin(foldPhase + 0.9)) * vec3(0.025, 0.03, 0.037) * coverage * 0.65;
+      color = mix(color, warm, lightFold * uFinish.z * coverage);
+      color += (lighting - 0.76) * 0.055 * coverage;
       gl_FragColor = vec4(clamp(color, 0.0, 1.0), 1.0);
     }
   `;
@@ -112,7 +109,7 @@
     const position = gl.getAttribLocation(program, "aPosition");
     gl.enableVertexAttribArray(position);
     gl.vertexAttribPointer(position, 2, gl.FLOAT, false, 0, 0);
-    const uniforms = Object.fromEntries(["uResolution", "uTime", "uPointer", "uPointerVelocity", "uPointerStrength"].map(name => [name, gl.getUniformLocation(program, name)]));
+    const uniforms = Object.fromEntries(["uResolution", "uTime", "uPointer", "uPointerVelocity", "uPointerStrength", "uFinish"].map(name => [name, gl.getUniformLocation(program, name)]));
     return {
       name: "webgl",
       resize() {
@@ -128,6 +125,7 @@
         gl.uniform2f(uniforms.uPointer, pointer.x, pointer.y);
         gl.uniform2f(uniforms.uPointerVelocity, pointer.velocityX, pointer.velocityY);
         gl.uniform1f(uniforms.uPointerStrength, pointer.strength);
+        gl.uniform3f(uniforms.uFinish, finish.chroma, finish.depth, finish.sheen);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
       }
     };
@@ -172,12 +170,15 @@
             const q = Math.sin(u * 1.3 + v * 1.7 + t * 0.65) * 0.65 + Math.sin(v * 1.5 - t * 0.42) * 0.35;
             const r = Math.cos(v * 1.4 + u * 1.1 - t * 0.55 + q) * 0.7 + Math.sin(u * 1.8 + t * 0.38) * 0.3;
             const density = (Math.sin(u * 1.4 + v * 0.8 + q * 1.9 + r * 1.5) + 1) * 0.5;
-            const ribbon = Math.pow((Math.sin(u * 1.2 + v * 0.6 + q * 2.6 - r * 1.6 + t * 0.5) + 1) * 0.5, 2) * 0.42;
+            const coveragePosition = Math.max(0, Math.min(1, (density - 0.22) / 0.6));
+            const coverage = coveragePosition * coveragePosition * (3 - 2 * coveragePosition);
+            const ribbon = Math.pow((Math.sin(u * 1.2 + v * 0.6 + q * 2.6 - r * 1.6 + t * 0.5) + 1) * 0.5, 2) * finish.sheen * coverage;
             const side = Math.max(0, Math.min(1, 0.5 + (u + q * 0.4) * 0.45));
-            const depth = 0.18 + density * 0.52;
+            const depth = coverage * finish.depth;
             const offset = (y * width + x) * 4;
             for (let channel = 0; channel < 3; channel++) {
-              const dye = blue[channel] * (1 - side) + lavender[channel] * side;
+              const pigment = blue[channel] * (1 - side) + lavender[channel] * side;
+              const dye = paper[channel] * (1 - finish.chroma) + pigment * finish.chroma;
               const color = paper[channel] * (1 - depth) + dye * depth;
               pixels.data[offset + channel] = color * (1 - ribbon) + warm[channel] * ribbon;
             }
@@ -197,6 +198,14 @@
 
   function resize() {
     aspect = innerWidth / Math.max(1, innerHeight);
+    const theme = getComputedStyle(document.documentElement);
+    const readFinish = (name, fallback) => {
+      const value = parseFloat(theme.getPropertyValue(name));
+      return Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : fallback;
+    };
+    finish.chroma = readFinish("--ambient-chroma", .78);
+    finish.depth = readFinish("--ambient-color-depth", .66);
+    finish.sheen = readFinish("--ambient-sheen", .4);
     renderer.resize();
     renderer.draw(elapsed);
   }

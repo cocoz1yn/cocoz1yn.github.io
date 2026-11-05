@@ -4,7 +4,11 @@
   --ambient-mist: 184 204 234;
   --ambient-lavender: 172 156 201;
   --ambient-warm: 245 244 241;
-  --ambient-strength: 1;
+  --ambient-strength: .72;
+  --ambient-chroma: .78;
+  --ambient-color-depth: .66;
+  --ambient-sheen: .4;
+  --ambient-frost-opacity: .28;
   --ambient-paper: 215 215 214;
   --muted: #485160;
 }
@@ -31,7 +35,7 @@ body::after {
 
 /* The deeper color layer moves underneath the brighter, translucent folds. */
 body::before {
-  z-index: -2;
+  z-index: -3;
   background:
     radial-gradient(ellipse 42% 56% at 8% 26%,
       rgb(var(--ambient-blue) / .72) 0%,
@@ -65,14 +69,22 @@ body::after {
 .ambient-fluid {
   position: fixed;
   inset: 0;
-  z-index: -1;
+  z-index: -2;
   width: 100%;
   height: 100%;
   pointer-events: none;
 }
 
-body.fluid-atmosphere-ready::before,
-body.fluid-atmosphere-ready::after { display: none; }
+body.fluid-atmosphere-ready::before { display: none; }
+
+/* Fine, stationary frost sits over the background, below all text and images. */
+body.fluid-atmosphere-ready::after {
+  display: block;
+  inset: 0;
+  background: url("assets/ambient-grain.svg") repeat;
+  opacity: var(--ambient-frost-opacity);
+  mix-blend-mode: soft-light;
+}
 
 @media (max-width: 760px) {
   body::before,
