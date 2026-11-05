@@ -17,11 +17,11 @@
   let aspect = 1;
   const finish = { chroma: 1, depth: .84, sheen: .30, edgeGrain: .17, speed: .85 };
   const palette = {
-    paper: [215, 215, 214],
-    colorA: [207, 216, 215],
-    colorB: [231, 207, 205],
-    highlight: [247, 247, 241],
-    shadow: [181, 201, 195],
+    paper: [233, 233, 230],
+    colorA: [229, 230, 228],
+    colorB: [207, 210, 205],
+    highlight: [251, 251, 242],
+    shadow: [166, 162, 162],
   };
   const paletteUniforms = Object.fromEntries(Object.keys(palette).map(name => [name, new Float32Array(3)]));
 
@@ -99,8 +99,8 @@
       float grain = 0.0;
       if (edge > 0.001) {
         // Material-space grain bends with the flow, concentrated in its soft boundary.
-        grain = (materialNoise(flow * 180.0 + q * 9.0) * 0.65
-          + materialNoise(flow * 360.0 - q * 13.0) * 0.35) * 2.0 - 1.0;
+        grain = (materialNoise(flow * 280.0 + q * 9.0) * 0.65
+          + materialNoise(flow * 560.0 - q * 13.0) * 0.35) * 2.0 - 1.0;
       }
       float coverage = clamp(baseCoverage + grain * edge * uEdgeGrain, 0.0, 1.0);
       vec3 color = mix(paper, dye, coverage * uFinish.y);
@@ -220,7 +220,7 @@
             const coveragePosition = Math.max(0, Math.min(1, (density - 0.22) / 0.6));
             const baseCoverage = coveragePosition * coveragePosition * (3 - 2 * coveragePosition);
             const edge = 4 * baseCoverage * (1 - baseCoverage);
-            const grainCoordinate = Math.sin(Math.floor((u + q * 0.8) * 96) * 12.9898 + Math.floor((v + r * 0.8) * 96) * 78.233) * 43758.5453;
+            const grainCoordinate = Math.sin(Math.floor((u + q * 0.8) * 150) * 12.9898 + Math.floor((v + r * 0.8) * 150) * 78.233) * 43758.5453;
             const grain = (grainCoordinate - Math.floor(grainCoordinate)) * 2 - 1;
             const coverage = Math.max(0, Math.min(1, baseCoverage + grain * edge * finish.edgeGrain * 0.35));
             const ribbon = Math.pow((Math.sin(u * 1.2 + v * 0.6 + q * 2.6 - r * 1.6 + t * 0.5) + 1) * 0.5, 2) * finish.sheen * coverage;

@@ -1,10 +1,11 @@
 /* Atmospheric refinement: a continuously deforming flow field, with flat controls. */
 :root {
-  --ambient-paper: 215 215 214;
-  --ambient-color-a: 207 216 215; /* CFD8D7, mist green */
-  --ambient-color-b: 231 207 205; /* E7CFCD, soft blush */
-  --ambient-highlight: 247 247 241; /* soft glass highlight */
-  --ambient-shadow: 181 201 195; /* B5C9C3, diluted sage */
+  --ambient-paper: 233 233 230; /* lighter gray-white base */
+  --paper: rgb(var(--ambient-paper));
+  --ambient-color-a: 229 230 228; /* E5E6E4, pale gray */
+  --ambient-color-b: 207 210 205; /* CFD2CD, gray green */
+  --ambient-highlight: 251 251 242; /* FBFBF2, warm white glass light */
+  --ambient-shadow: 166 162 162; /* A6A2A2, diluted soft gray */
   --ambient-strength: 1;
   --ambient-chroma: 1;
   --ambient-color-depth: .84;
