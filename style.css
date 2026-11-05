@@ -41,6 +41,9 @@ h1, h2, h3, p { margin-top: 0; }
 .gallery-page { min-height: calc(100svh - 82px); display: grid; grid-template-rows: auto minmax(0, 1fr); }
 .gallery-context { padding: 22px 0 16px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .gallery-hint { margin: 0; color: var(--muted); font: 500 13px var(--font-label); }
+.gallery-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 20px; }
+.gallery-switch { display: inline-flex; align-items: center; gap: 12px; border: 1px solid var(--line); padding: 6px 12px; font: 500 13px var(--font-label); }
+.gallery-switch:hover, .gallery-switch:focus-visible { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 .project-rail { min-width: 0; display: flex; align-items: start; gap: clamp(20px, 2.2vw, 34px); overflow-x: auto; overflow-y: hidden; padding: 8px max(28px, calc((100vw - 1180px) / 2)) 40px; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: var(--cinerous) transparent; }
 .project-rail:focus { outline: 1px solid var(--ink); outline-offset: -8px; }
 .gallery-project, .gallery-project.project-wide, .gallery-project.project-tall, .gallery-project.project-medium { flex: 0 0 clamp(320px, 38vw, 520px); height: auto; margin: 0; scroll-snap-align: start; }
@@ -131,6 +134,17 @@ h1, h2, h3, p { margin-top: 0; }
 .project-detail-link { display: inline-block; margin-top: 44px; border-bottom: 1px solid var(--ink); padding-bottom: 5px; font: 500 14px var(--font-label); }
 .project-detail-link:hover { border-color: var(--cinerous); color: var(--cinerous); }
 
+/* Proposed projects share the Work gallery and project detail structure. */
+.in-progress-page { height: auto; min-height: 100svh; overflow: visible; }
+.proposal-page .project-detail-copy h1 { font-size: clamp(30px, 3.2vw, 46px); }
+.proposal-page .project-detail-copy > p:not(.eyebrow) { color: var(--muted); font-size: 16px; }
+.proposal-page .project-detail-copy .proposal-status { margin-top: 22px; padding-top: 14px; border-top: 1px solid var(--line); font: 500 14px/1.5 var(--font-label); }
+.proposal-sections { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 42px clamp(36px, 7vw, 100px); margin-top: 64px; }
+.proposal-sections section { border-top: 1px solid var(--line); padding-top: 18px; }
+.proposal-sections h2 { margin-bottom: 18px; font: 500 28px/1.1 var(--font-display); }
+.proposal-sections p { color: var(--muted); font-size: 15px; line-height: 1.7; }
+.proposal-sections p:last-child { margin-bottom: 0; }
+
 /* Contact remains sparse and direct. */
 .contact-page { min-height: calc(100svh - 158px); padding: 22vh 0 12vh; }
 .contact-layout { display: block; }
@@ -157,6 +171,7 @@ h1, h2, h3, p { margin-top: 0; }
   .gallery-project, .gallery-project.project-wide, .gallery-project.project-tall, .gallery-project.project-medium { height: auto; margin: 0; }
   .gallery-project-link { gap: 12px; }
   .project-media { height: 54vw; min-height: 250px; }
+  .in-progress-page .project-media { width: 100%; height: auto; min-height: 0; }
   .project-copy p { opacity: 1; }
   .project-copy span { opacity: 1; }
   .about-media-stage { height: 50svh; }
@@ -182,6 +197,7 @@ h1, h2, h3, p { margin-top: 0; }
   .project-detail-back { margin-bottom: 30px; }
   .project-detail { grid-template-columns: 1fr; gap: 32px; }
   .project-detail-copy h1 { font-size: 39px; }
+  .proposal-sections { grid-template-columns: 1fr; gap: 32px; margin-top: 42px; }
   .project-detail-link { margin-top: 32px; }
   .contact-page { min-height: calc(100svh - 146px); padding: 17vh 0 10vh; }
   .contact-links { flex-wrap: wrap; margin: 52px 0 0; }

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+  <title id="title">Parcel suitability: proposed screening workflow</title>
+  <desc id="desc">Flood exposure, power proximity, terrain, and community context contribute to an evidence-based parcel report.</desc>
+  <rect width="800" height="500" fill="#c5c6c5"/>
+  <g fill="none" stroke="#a08a81" stroke-width="1"><path d="M44 86H756M44 440H756"/><path d="M66 198H106M66 264H106M66 330H106M354 264H407M407 165V363M407 165H448M407 231H448M407 297H448M407 363H448"/></g>
+  <g font-family="Arial, sans-serif" fill="#595d66" font-size="12" letter-spacing="2"><text x="44" y="470">PHILADELPHIA / PROPOSED WORKFLOW</text></g>
+  <g transform="translate(106 138)">
+    <rect width="248" height="252" fill="#d7d7d6"/>
+    <g fill="none" stroke="#b7b8bb"><path d="M0 55H248M0 130H248M0 201H248M57 0V252M143 0V252M215 0V252"/><path d="M0 252L248 0"/></g>
+    <path d="M57 130L143 130L143 201L57 201Z" fill="#a08a81" fill-opacity=".45" stroke="#272b36" stroke-width="2"/>
+    <circle cx="100" cy="164" r="5" fill="#272b36"/>
+    <rect x="14" y="14" width="137" height="28" fill="#d7d7d6"/><text x="24" y="33" font-family="Arial, sans-serif" font-size="14" fill="#272b36">Selected parcel</text>
+  </g>
+  <g font-family="Arial, sans-serif" font-size="17" fill="#272b36">
+    <g fill="#d7d7d6"><rect x="448" y="138" width="308" height="54"/><rect x="448" y="204" width="308" height="54"/><rect x="448" y="270" width="308" height="54"/><rect x="448" y="336" width="308" height="54"/></g>
+    <text x="468" y="172">01 / Flood exposure</text><text x="468" y="238">02 / Power proximity</text><text x="468" y="304">03 / Terrain buildability</text><text x="468" y="370">04 / Community context</text>
+  </g>
+  <text x="448" y="420" font-family="Arial, sans-serif" font-size="14" fill="#595d66">Measurements → Explainable report</text>
+</svg>

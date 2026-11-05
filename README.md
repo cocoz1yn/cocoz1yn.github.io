@@ -12,7 +12,10 @@ https://cocoz1yn.github.io/website.github.io/
 ## Files
 
 - `index.html`: single-screen homepage
-- `work.html`: completed and ongoing projects
+- `work.html`: selected work
+- `in-progress.html`: projects in development
+- `project-data-center-suitability.html`: parcel suitability agent proposal
+- `project-philadelphia-health-accessibility.html`: healthcare accessibility proposal
 - `archive.html`: smaller studies, maps, and experiments
 - `about.html`: biography, skills, experience, and creative work
 - `contact.html`: contact links and CV

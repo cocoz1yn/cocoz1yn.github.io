@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="An in-progress project by Coco Zhou exploring healthcare accessibility in Philadelphia and its association with neighborhood socioeconomic indicators.">
+    <title>Mapping Health Accessibility in Philadelphia | Coco Zhou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@400;500&family=Inter:wght@400;500;600&family=Libre+Bodoni:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body class="proposal-page">
+    <a class="skip-link" href="#main-content">Skip to project</a>
+    <header class="site-header"><a class="wordmark" href="work.html" aria-label="Go to work">Coco Zhou</a><button class="menu-button" type="button" aria-expanded="false" aria-controls="site-navigation" aria-label="Open navigation menu"><span></span><span></span></button><nav id="site-navigation" class="site-navigation" aria-label="Main navigation"><a href="work.html">Work</a><a href="in-progress.html" aria-current="page">In progress</a><a href="archive.html">Index</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></header>
+    <main id="main-content" class="section-shell project-detail-page">
+      <a class="project-detail-back" href="in-progress.html">Back to in progress</a>
+      <article class="project-detail">
+        <figure class="project-detail-visual"><img src="assets/philadelphia-health-accessibility.svg" alt="Proposed workflow linking healthcare facility data and socioeconomic indicators with an interactive map and statistical analysis"><figcaption>Philadelphia / 2026 / Proposed research workflow</figcaption></figure>
+        <div class="project-detail-copy">
+          <p class="eyebrow">In progress / Health accessibility</p>
+          <h1>Mapping Health Accessibility in Philadelphia and Its Association with Socioeconomic Indicators</h1>
+          <p>This project proposes an interactive web-based GIS platform to map Philadelphia's healthcare infrastructure and examine its relationship with neighborhood socioeconomic conditions. It aims to help residents locate relevant services while providing a way to explore spatial disparities in healthcare availability and access.</p>
+          <p class="proposal-status">In development. The dashboard and analyses below describe the proposed scope.</p>
+        </div>
+      </article>
+      <div class="proposal-sections">
+        <section><h2>A map for exploring care</h2><p>The planned dashboard will bring together hospitals, urgent care centers, primary care clinics, mental health facilities, reproductive health services, and pharmacies. Visitors will be able to filter by service and, where verified, by public, nonprofit, or private ownership.</p><p>Facility popups will provide names, addresses, websites, and available contact details. Address or neighborhood search, census tract accessibility views, and socioeconomic overlays will help users explore nearby services and potential gaps.</p></section>
+        <section><h2>Understanding neighborhood differences</h2><p>The analysis will use census tracts to examine healthcare facilities per 10,000 residents in relation to income, poverty, population density, insurance coverage, age, vehicle availability, and educational attainment. Additional models will examine driving and public transportation travel times.</p><p>OLS regression will provide a baseline, while Random Forest will explore nonlinear relationships. SHAP values will help interpret the contribution of socioeconomic indicators to model predictions. The focus is on associations rather than causal claims.</p></section>
+        <section><h2>Potential data sources</h2><p>Healthcare locations may draw on DVRPC Overture Maps, OpenStreetMap, PASDA, OpenDataPhilly, NPPES, HRSA, and CMS. U.S. Census Bureau ACS data will supply tract-level demographic and socioeconomic indicators.</p><p>Provider websites and Google Places may supplement facility information. Operating hours and ratings will be considered only where reliable, legally reusable data are available.</p></section>
+        <section><h2>Planned outcome</h2><p>The project will combine a public-facing facility map with an analytical view of healthcare distribution, neighborhood conditions, and potential service gaps. Its aim is to make healthcare geography easier to explore and support a more informed understanding of accessibility differences across Philadelphia.</p></section>
+      </div>
+    </main>
+    <script src="script.js" defer></script>
+  </body>
+</html>
