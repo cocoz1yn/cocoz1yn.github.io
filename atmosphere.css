@@ -1,0 +1,49 @@
+/* Atmospheric refinement, round 1: static edge light and background-only grain. */
+:root {
+  --ambient-blue: 117 134 162;
+  --ambient-mist: 187 198 213;
+  --ambient-lavender: 201 197 214;
+  --ambient-warm: 245 244 241;
+  --ambient-strength: 1;
+  --ambient-grain-opacity: .022;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+}
+
+body::before {
+  z-index: -2;
+  opacity: var(--ambient-strength);
+  background:
+    radial-gradient(ellipse 66% 95% at -22% 18%,
+      rgb(var(--ambient-blue) / .15) 0%,
+      rgb(var(--ambient-mist) / .075) 36%,
+      transparent 72%),
+    radial-gradient(ellipse 53% 70% at 112% 82%,
+      rgb(var(--ambient-lavender) / .16) 0%,
+      transparent 68%),
+    radial-gradient(ellipse 40% 50% at 34% 118%,
+      rgb(var(--ambient-warm) / .12) 0%,
+      transparent 76%);
+}
+
+body::after {
+  z-index: -1;
+  background: url("assets/ambient-grain.svg") repeat;
+  opacity: var(--ambient-grain-opacity);
+}
+
+@media (forced-colors: active) {
+  body::before,
+  body::after { display: none; }
+}
