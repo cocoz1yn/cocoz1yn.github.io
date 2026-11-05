@@ -20,6 +20,8 @@ https://cocoz1yn.github.io/
 - `about.html`: biography, skills, experience, and creative work
 - `contact.html`: contact links and CV
 - `style.css`: website styling
+- `atmosphere.css`: atmospheric palette and static fallback
+- `atmosphere-flow.js`: deforming background flow with pointer response and reduced-motion support
 - `script.js`: mobile menu and gallery controls
 - `project-search.js`: local project matching and accessible search suggestions
 - `assets/`: images, CV, and other files
