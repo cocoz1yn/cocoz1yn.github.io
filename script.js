@@ -35,7 +35,13 @@ if (projectRail) {
       return;
     }
     // One short glide follows a shared target; new ticks never restart it.
+    const previous = projectRail.scrollLeft;
     projectRail.scrollLeft += remaining * (1 - Math.exp(-delta / 85));
+    // Browser zoom may round tiny movements; finish instead of spinning at rest.
+    if (projectRail.scrollLeft === previous) {
+      projectRail.scrollLeft = wheelTarget;
+      return;
+    }
     wheelFrame = requestAnimationFrame(glideWheel);
   }
 
