@@ -42,8 +42,8 @@ function projectSearchScore(project, query) {
   projects.push(
     {
       title: "Data Center Parcel Suitability Agent: An Explainable Web-Based Screening Tool",
-      description: "A proposed AI-assisted screening tool bringing flood exposure, power proximity, terrain, and community context into one transparent parcel report.",
-      keywords: "data center infrastructure artificial intelligence AI agent GIS site suitability screening flood terrain power Philadelphia",
+      description: "An AI-assisted, web-based site screening tool that generates clear, explainable reports for potential data center locations.",
+      keywords: "data center infrastructure artificial intelligence AI agent GIS site suitability screening flood terrain power United States nationwide web reports",
       href: "project-data-center-suitability.html",
       label: "In progress / Geospatial AI",
     },
