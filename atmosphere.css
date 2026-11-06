@@ -18,6 +18,11 @@
 
 html { overflow-x: clip; }
 
+/* Let the moving atmosphere show through the Work image surrounds. */
+.work-page:not(.in-progress-page) .project-media {
+  background: rgb(226 226 224 / .35);
+}
+
 body {
   position: relative;
   isolation: isolate;
