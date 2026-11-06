@@ -12,68 +12,21 @@ if (menuButton && navigation) {
 const projectRail = document.querySelector(".project-rail");
 
 if (projectRail) {
-  const reducedScrollMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let wheelTarget = projectRail.scrollLeft;
-  let wheelFrame = 0;
-  let wheelTime = 0;
-
-  function stopWheelGlide() {
-    cancelAnimationFrame(wheelFrame);
-    wheelFrame = 0;
-    wheelTarget = projectRail.scrollLeft;
-  }
-
-  function glideWheel(now) {
-    wheelFrame = 0;
-    if (!window.matchMedia("(min-width: 761px)").matches) return;
-    const delta = Math.min(40, Math.max(1, now - wheelTime));
-    wheelTime = now;
-    wheelTarget = Math.max(0, Math.min(projectRail.scrollWidth - projectRail.clientWidth, wheelTarget));
-    const remaining = wheelTarget - projectRail.scrollLeft;
-    if (reducedScrollMotion.matches || Math.abs(remaining) <= 0.5) {
-      projectRail.scrollLeft = wheelTarget;
-      return;
-    }
-    // One short glide follows a shared target; new ticks never restart it.
-    const previous = projectRail.scrollLeft;
-    projectRail.scrollLeft += remaining * (1 - Math.exp(-delta / 85));
-    // Browser zoom may round tiny movements; finish instead of spinning at rest.
-    if (projectRail.scrollLeft === previous) {
-      projectRail.scrollLeft = wheelTarget;
-      return;
-    }
-    wheelFrame = requestAnimationFrame(glideWheel);
-  }
-
   projectRail.addEventListener("wheel", (event) => {
     const isDesktopGallery = window.matchMedia("(min-width: 761px)").matches;
 
     if (isDesktopGallery && !event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) {
       event.preventDefault();
+      // Follow each wheel event immediately; queued smooth scrolling and snapping
+      // otherwise restart on every tick and make the gallery hesitate, then jump.
       const unit = event.deltaMode === 1 ? 16 : event.deltaMode === 2 ? projectRail.clientWidth : 1;
-      const distance = event.deltaY * unit;
-      if (reducedScrollMotion.matches) {
-        stopWheelGlide();
-        projectRail.scrollLeft += distance;
-        return;
-      }
-      if (!wheelFrame) {
-        wheelTarget = projectRail.scrollLeft;
-        wheelTime = performance.now();
-      }
-      // Reversing direction responds immediately, without finishing the old glide.
-      if (distance * (wheelTarget - projectRail.scrollLeft) < 0) wheelTarget = projectRail.scrollLeft;
-      wheelTarget = Math.max(0, Math.min(projectRail.scrollWidth - projectRail.clientWidth, wheelTarget + distance));
-      if (!wheelFrame) wheelFrame = requestAnimationFrame(glideWheel);
-    } else {
-      stopWheelGlide();
+      projectRail.scrollLeft += event.deltaY * unit;
     }
   }, { passive: false });
 
   projectRail.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
       event.preventDefault();
-      stopWheelGlide();
       const direction = event.key === "ArrowRight" ? 1 : -1;
       projectRail.scrollBy({ left: direction * 420, behavior: "smooth" });
     }
@@ -84,7 +37,6 @@ if (projectRail) {
   let activePointerId = null;
 
   projectRail.addEventListener("pointerdown", (event) => {
-    stopWheelGlide();
     if (!window.matchMedia("(min-width: 761px)").matches) return;
     if (event.button !== 0 || event.target.closest("a, button")) return;
 
